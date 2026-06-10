@@ -1,0 +1,1 @@
+ALTER TABLE activity ADD COLUMN is_contact_activity INT DEFAULT 0;

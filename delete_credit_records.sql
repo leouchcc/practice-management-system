@@ -1,0 +1,1 @@
+DELETE FROM credit_record WHERE id IN (10, 11, 12);

@@ -1,0 +1,1 @@
+DELETE FROM activity_registration WHERE id IN (10, 11, 12);

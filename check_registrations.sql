@@ -1,0 +1,1 @@
+SELECT id, student_id, activity_id, status FROM activity_registration;

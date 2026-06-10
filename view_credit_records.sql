@@ -1,0 +1,1 @@
+SELECT id, student_id, activity_id, credit_hours, credit_points, academic_year, semester, create_time FROM credit_record;

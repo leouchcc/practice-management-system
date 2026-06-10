@@ -1,0 +1,1 @@
+DESCRIBE system_notification;

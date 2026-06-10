@@ -1,0 +1,26 @@
+# 后端
+backend/target/
+backend/*.class
+backend/*.jar
+
+# 前端
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# 环境配置
+*.env
+*.local
+
+# 临时文件
+*.log
+*.tmp
+
+# 上传文件
+backend/uploads/
