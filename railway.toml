@@ -1,0 +1,10 @@
+[build]
+builder = "maven"
+buildCommand = "cd backend && mvn clean package -DskipTests"
+workingDir = "."
+
+[deploy]
+startCommand = "java -jar backend/target/practice-management-system-1.0.0.jar"
+
+[env]
+PORT = "8080"
