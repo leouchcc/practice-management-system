@@ -1,3 +1,6 @@
+[build]
+builder = "docker"
+dockerfilePath = "backend/Dockerfile"
+
 [deploy]
-startCommand = "mvn spring-boot:run"
-workingDir = "backend"
+startCommand = "java -jar app.jar"
