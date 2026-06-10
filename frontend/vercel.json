@@ -1,11 +1,5 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vue",
-  "redirects": [
-    {
-      "source": "/api/(.*)",
-      "destination": "https://practice-management-system-production.up.railway.app/api/$1"
-    }
-  ]
+  "framework": "vue"
 }
