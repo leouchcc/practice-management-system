@@ -3,13 +3,13 @@ spring:
     name: practice-management-system
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL:jdbc:mysql://localhost:3306/practice_management?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:123520}
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/practice_management?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:123520}
   data:
     redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
+      host: ${REDISHOST:localhost}
+      port: ${REDISPORT:6379}
       database: ${REDIS_DB:0}
       timeout: 3000ms
       lettuce:
@@ -32,7 +32,7 @@ mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
 
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 logging:
   level:
