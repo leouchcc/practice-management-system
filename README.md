@@ -9,6 +9,7 @@
 - Spring Boot 3.2.0
 - MyBatis Plus 3.5.5
 - MySQL 8.0
+- Redis
 - JWT (io.jsonwebtoken:jjwt:0.12.3)
 
 ### 前端
@@ -27,9 +28,8 @@
 4. **活动报名** - 活动报名、审核、签到签退
 5. **学时学分** - 学时学分记录、统计
 6. **成绩评价** - 活动评分、评语
-7. **证书管理** - 证书生成、查询
-8. **公告通知** - 公告发布、系统通知
-9. **数据统计** - 数据统计、排行榜
+7. **公告通知** - 公告发布、系统通知
+8. **数据统计** - 数据统计、排行榜
 
 ## 项目结构
 
@@ -148,10 +148,6 @@ npm run dev
 - POST /api/evaluation - 创建评价
 - GET /api/evaluation/list - 获取评价列表
 - GET /api/evaluation/average/{activityId} - 获取平均分
-
-### 证书接口
-- GET /api/certificate/list - 获取证书列表
-- GET /api/certificate/{certificateNo} - 根据编号查询证书
 
 ### 公告接口
 - GET /api/announcement/list - 获取公告列表
