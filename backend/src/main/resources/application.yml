@@ -3,9 +3,9 @@ spring:
     name: practice-management-system
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${JDBC_DATABASE_URL}
-    username: ${MYSQL_USER}
-    password: ${MYSQL_PASSWORD}
+    url: ${JDBC_DATABASE_URL:jdbc:mysql://localhost:3306/practice_management?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:123520}
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
