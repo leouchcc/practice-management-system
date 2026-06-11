@@ -1,13 +1,8 @@
 [build]
-builder = "nixpacks"
-
-[nixpacks]
-pkgs = ["openjdk-17"]
-installCmd = "cd backend && mvn clean package -DskipTests"
-startCmd = "java -jar backend/target/practice-management-system-1.0.0.jar"
+builder = "dockerfile"
 
 [deploy]
-startCommand = "java -jar backend/target/practice-management-system-1.0.0.jar"
+startCommand = "java -jar app.jar"
 
 [vars]
 PORT = "8080"
