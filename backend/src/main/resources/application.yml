@@ -8,8 +8,9 @@ spring:
     password: ${DATABASE_PASSWORD:123520}
   data:
     redis:
-      host: ${REDISHOST:localhost}
-      port: ${REDISPORT:6379}
+      host: ${REDIS_URL:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
       database: ${REDIS_DB:0}
       timeout: 3000ms
       lettuce:
