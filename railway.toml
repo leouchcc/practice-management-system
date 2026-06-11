@@ -4,6 +4,10 @@ builder = "nixpacks"
 [nixpacks]
 pkgs = ["openjdk-17"]
 
+[nixpacks.plan]
+install = ["cd backend && mvn clean package -DskipTests"]
+start = ["java -jar backend/target/practice-management-system-1.0.0.jar"]
+
 [deploy]
 startCommand = "java -jar backend/target/practice-management-system-1.0.0.jar"
 
