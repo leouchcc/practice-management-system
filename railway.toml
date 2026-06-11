@@ -1,16 +1,14 @@
 [build]
 builder = "nixpacks"
 
-[deploy]
-startCommand = "java -jar backend/target/practice-management-system-1.0.0.jar"
-
 [nixpacks]
-phases = {
-  install = {
-    cmds = ["cd backend && mvn clean install -DskipTests"]
-  },
+pkgs = ["openjdk-17"]
+plan = {
   build = {
-    cmds = []
+    cmds = ["cd backend && mvn clean package -DskipTests"]
+  },
+  start = {
+    cmd = "java -jar backend/target/practice-management-system-1.0.0.jar"
   }
 }
 
