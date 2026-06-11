@@ -22,20 +22,30 @@ public class PracticeManagementSystemApplication {
     public CommandLineRunner initDatabase() {
         return args -> {
             try {
-                String url = System.getenv("JDBC_DATABASE_URL");
-                if (url == null || url.isEmpty()) {
-                    url = "jdbc:mysql://localhost:3306/practice_management?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true";
-                }
-                
+                String host = System.getenv("MYSQLHOST");
+                String port = System.getenv("MYSQLPORT");
+                String database = System.getenv("MYSQLDATABASE");
                 String username = System.getenv("MYSQLUSER");
+                String password = System.getenv("MYSQLPASSWORD");
+                
+                // 如果环境变量为空，使用默认值
+                if (host == null || host.isEmpty()) {
+                    host = "localhost";
+                }
+                if (port == null || port.isEmpty()) {
+                    port = "3306";
+                }
+                if (database == null || database.isEmpty()) {
+                    database = "practice_management";
+                }
                 if (username == null || username.isEmpty()) {
                     username = "root";
                 }
-                
-                String password = System.getenv("MYSQLPASSWORD");
                 if (password == null || password.isEmpty()) {
                     password = "123520";
                 }
+                
+                String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&connectTimeout=10000&socketTimeout=30000";
 
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection connection = DriverManager.getConnection(url, username, password);
