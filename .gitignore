@@ -17,6 +17,7 @@ frontend/.vite/
 # 环境配置
 *.env
 *.local
+!frontend/.env
 
 # 临时文件
 *.log
