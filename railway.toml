@@ -1,13 +1,18 @@
 [build]
-builder = "Dockerfile"
-dockerfilePath = "backend/Dockerfile"
+builder = "nixpacks"
 
 [deploy]
-startCommand = "java -jar app.jar"
+startCommand = "java -jar backend/target/practice-management-system-1.0.0.jar"
+
+[nixpacks]
+phases = {
+  install = {
+    cmds = ["cd backend && mvn clean install -DskipTests"]
+  },
+  build = {
+    cmds = []
+  }
+}
 
 [vars]
-JDBC_DATABASE_URL = ""
-MYSQLUSER = ""
-MYSQLPASSWORD = ""
-REDIS_URL = ""
 PORT = "8080"
