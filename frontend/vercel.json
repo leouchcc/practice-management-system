@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://practice-management-system-production.up.railway.app/api/$1"
+    },
+    {
+      "source": "/((?!static/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
