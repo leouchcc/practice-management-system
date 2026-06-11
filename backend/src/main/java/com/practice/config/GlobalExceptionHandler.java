@@ -13,13 +13,21 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public Result<Void> handleRuntimeException(RuntimeException e) {
-        logger.error("Runtime exception occurred: {}", e.getMessage(), e);
-        return Result.error(e.getMessage());
+        String msg = e.getMessage();
+        if (msg == null || msg.isEmpty()) {
+            msg = "运行时异常";
+        }
+        logger.error("Runtime exception occurred: {}", msg, e);
+        return Result.error(msg);
     }
 
     @ExceptionHandler(Exception.class)
     public Result<Void> handleException(Exception e) {
-        logger.error("Exception occurred: {}", e.getMessage(), e);
-        return Result.error("服务器内部错误: " + e.getMessage());
+        String msg = e.getMessage();
+        if (msg == null || msg.isEmpty()) {
+            msg = "服务器内部错误";
+        }
+        logger.error("Exception occurred: {}", msg, e);
+        return Result.error("服务器内部错误: " + msg);
     }
 }
