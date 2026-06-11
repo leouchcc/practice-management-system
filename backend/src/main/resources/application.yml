@@ -1,4 +1,4 @@
-server:
+﻿server:
   port: ${PORT:8080}
 
 spring:
@@ -17,9 +17,9 @@ spring:
       max-lifetime: 1800000
   data:
     redis:
-      host: localhost
-      port: 6379
-      password: ''
+      host: ${REDISHOST:localhost}
+      port: ${REDISPORT:6379}
+      password: ${REDISPASSWORD:}
       database: 0
       timeout: 3000ms
 
@@ -38,7 +38,3 @@ mybatis-plus:
 jwt:
   secret: practice-management-system-secret-key-2024
   expiration: 86400000
-
-logging:
-  level:
-    com.practice: DEBUG
