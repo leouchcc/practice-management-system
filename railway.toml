@@ -1,5 +1,0 @@
-[build]
-builder = "nixpacks"
-
-[nixpacks]
-pkgs = ["openjdk-17"]
