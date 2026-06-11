@@ -6,9 +6,9 @@ spring:
     name: practice-management-system
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DATABASE_URL}
-    username: ${MYSQLUSER}
-    password: ${MYSQLPASSWORD}
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/practice_management?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&connectTimeout=10000&socketTimeout=30000}
+    username: ${MYSQLUSER:root}
+    password: ${MYSQLPASSWORD:123520}
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
@@ -17,9 +17,9 @@ spring:
       max-lifetime: 1800000
   data:
     redis:
-      host: ${REDISHOST}
-      port: ${REDISPORT}
-      password: ${REDISPASSWORD}
+      host: ${REDISHOST:localhost}
+      port: ${REDISPORT:6379}
+      password: ${REDISPASSWORD:}
       database: 0
       timeout: 3000ms
 
