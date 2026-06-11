@@ -32,7 +32,7 @@ public class PasswordResetController {
     }
 
     @PostMapping("/reset")
-    public Result<Void> resetPassword(@RequestParam String username, @RequestParam String newPassword) {
+    public Result<String> resetPassword(@RequestParam String username, @RequestParam String newPassword) {
         User user = userMapper.selectOne(new com.baomidou.mybatisplus.core.conditions.query.QueryWrapper<User>().eq("username", username));
         if (user == null) {
             return Result.error("用户不存在");
