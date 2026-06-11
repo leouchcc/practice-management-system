@@ -60,23 +60,23 @@ public class DataSyncController {
     public Result<String> syncData(@RequestBody Map<String, List<Map<String, Object>>> data) {
         try {
             // 清空现有数据
-            jdbcTemplate.execute("DELETE FROM registration");
+            jdbcTemplate.execute("DELETE FROM activity_registration");
             jdbcTemplate.execute("DELETE FROM activity");
-            jdbcTemplate.execute("DELETE FROM category");
+            jdbcTemplate.execute("DELETE FROM activity_category");
             jdbcTemplate.execute("DELETE FROM announcement");
-            jdbcTemplate.execute("DELETE FROM suggestion");
-            jdbcTemplate.execute("DELETE FROM notification");
+            jdbcTemplate.execute("DELETE FROM activity_suggestion");
+            jdbcTemplate.execute("DELETE FROM system_notification");
             jdbcTemplate.execute("DELETE FROM credit_record");
             jdbcTemplate.execute("DELETE FROM sys_user");
 
             // 重置自增ID
             jdbcTemplate.execute("ALTER TABLE sys_user AUTO_INCREMENT = 1");
-            jdbcTemplate.execute("ALTER TABLE category AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE activity_category AUTO_INCREMENT = 1");
             jdbcTemplate.execute("ALTER TABLE activity AUTO_INCREMENT = 1");
-            jdbcTemplate.execute("ALTER TABLE registration AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE activity_registration AUTO_INCREMENT = 1");
             jdbcTemplate.execute("ALTER TABLE announcement AUTO_INCREMENT = 1");
-            jdbcTemplate.execute("ALTER TABLE suggestion AUTO_INCREMENT = 1");
-            jdbcTemplate.execute("ALTER TABLE notification AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE activity_suggestion AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE system_notification AUTO_INCREMENT = 1");
             jdbcTemplate.execute("ALTER TABLE credit_record AUTO_INCREMENT = 1");
 
             // 导入用户数据
@@ -98,7 +98,7 @@ public class DataSyncController {
             if (categories != null) {
                 for (Map<String, Object> category : categories) {
                     jdbcTemplate.update(
-                        "INSERT INTO category (name, description, create_time, update_time, deleted) VALUES (?, ?, ?, ?, ?)",
+                        "INSERT INTO activity_category (name, description, create_time, update_time, deleted) VALUES (?, ?, ?, ?, ?)",
                         category.get("name"), category.get("description"),
                         category.get("create_time"), category.get("update_time"), category.get("deleted")
                     );
@@ -129,7 +129,7 @@ public class DataSyncController {
             if (registrations != null) {
                 for (Map<String, Object> registration : registrations) {
                     jdbcTemplate.update(
-                        "INSERT INTO registration (activity_id, user_id, status, real_name, student_id, phone, reason, cancel_reason, create_time, update_time, deleted, proof_file_path, proof_file_name, proof_submit_time, proof_verified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        "INSERT INTO activity_registration (activity_id, user_id, status, real_name, student_id, phone, reason, cancel_reason, create_time, update_time, deleted, proof_file_path, proof_file_name, proof_submit_time, proof_verified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         registration.get("activity_id"), registration.get("user_id"), registration.get("status"),
                         registration.get("real_name"), registration.get("student_id"), registration.get("phone"),
                         registration.get("reason"), registration.get("cancel_reason"),
@@ -162,6 +162,32 @@ public class DataSyncController {
                         record.get("user_id"), record.get("activity_id"), record.get("hours"),
                         record.get("points"), record.get("year"), record.get("semester"),
                         record.get("create_time"), record.get("update_time"), record.get("deleted")
+                    );
+                }
+            }
+
+            // 导入通知数据
+            List<Map<String, Object>> notifications = data.get("notifications");
+            if (notifications != null) {
+                for (Map<String, Object> notification : notifications) {
+                    jdbcTemplate.update(
+                        "INSERT INTO system_notification (user_id, title, content, type, is_read, related_id, related_type, deleted, create_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        notification.get("user_id"), notification.get("title"), notification.get("content"),
+                        notification.get("type"), notification.get("is_read"), notification.get("related_id"),
+                        notification.get("related_type"), notification.get("deleted"), notification.get("create_time")
+                    );
+                }
+            }
+
+            // 导出入校建议数据
+            List<Map<String, Object>> suggestions = data.get("suggestions");
+            if (suggestions != null) {
+                for (Map<String, Object> suggestion : suggestions) {
+                    jdbcTemplate.update(
+                        "INSERT INTO activity_suggestion (activity_id, sender_id, content, status, create_time, update_time, deleted) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                        suggestion.get("activity_id"), suggestion.get("sender_id"), suggestion.get("content"),
+                        suggestion.get("status"), suggestion.get("create_time"), suggestion.get("update_time"),
+                        suggestion.get("deleted")
                     );
                 }
             }
