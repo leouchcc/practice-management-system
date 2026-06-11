@@ -24,10 +24,15 @@ public class HealthController {
     @GetMapping("/env")
     public Result<Map<String, String>> getEnv() {
         Map<String, String> env = new HashMap<>();
-        env.put("JDBC_DATABASE_URL", System.getenv("JDBC_DATABASE_URL"));
+        env.put("PORT", System.getenv("PORT"));
+        env.put("MYSQLHOST", System.getenv("MYSQLHOST"));
+        env.put("MYSQLPORT", System.getenv("MYSQLPORT"));
+        env.put("MYSQLDATABASE", System.getenv("MYSQLDATABASE"));
         env.put("MYSQLUSER", System.getenv("MYSQLUSER"));
         env.put("MYSQLPASSWORD", System.getenv("MYSQLPASSWORD"));
-        env.put("REDIS_URL", System.getenv("REDIS_URL"));
+        env.put("REDISHOST", System.getenv("REDISHOST"));
+        env.put("REDISPORT", System.getenv("REDISPORT"));
+        env.put("REDISPASSWORD", System.getenv("REDISPASSWORD"));
         return Result.success(env);
     }
 }
