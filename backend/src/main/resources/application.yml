@@ -14,9 +14,9 @@ spring:
       max-lifetime: 1800000
   data:
     redis:
-      host: ${REDISHOST}
-      port: ${REDISPORT}
-      password: ${REDISPASSWORD}
+      host: ${REDISHOST:localhost}
+      port: ${REDISPORT:6379}
+      password: ${REDISPASSWORD:}
       database: 0
       timeout: 3000ms
       lettuce:
