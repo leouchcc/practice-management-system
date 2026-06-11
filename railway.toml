@@ -3,12 +3,3 @@ builder = "nixpacks"
 
 [nixpacks]
 pkgs = ["openjdk-17"]
-
-[nixpacks.plan.build]
-cmds = ["cd backend && mvn clean package -DskipTests"]
-
-[nixpacks.plan.start]
-cmd = "java -jar backend/target/practice-management-system-1.0.0.jar"
-
-[vars]
-PORT = "8080"
