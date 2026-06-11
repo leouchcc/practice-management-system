@@ -1,0 +1,13 @@
+[build]
+builder = "Dockerfile"
+dockerfilePath = "backend/Dockerfile"
+
+[deploy]
+startCommand = "java -jar app.jar"
+
+[vars]
+JDBC_DATABASE_URL = ""
+MYSQLUSER = ""
+MYSQLPASSWORD = ""
+REDIS_URL = ""
+PORT = "8080"
