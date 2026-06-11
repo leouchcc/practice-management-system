@@ -91,7 +91,7 @@ public class PracticeManagementSystemApplication {
                     System.out.println("is_contact_activity column might already exist: " + e.getMessage());
                 }
 
-                String addRealNameColumn = "ALTER TABLE user ADD COLUMN real_name VARCHAR(50) DEFAULT NULL COMMENT '真实姓名'";
+                String addRealNameColumn = "ALTER TABLE sys_user ADD COLUMN real_name VARCHAR(50) DEFAULT NULL COMMENT '真实姓名'";
                 try {
                     statement.executeUpdate(addRealNameColumn);
                     System.out.println("Successfully added real_name column!");
