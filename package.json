@@ -1,5 +1,9 @@
 {
   "scripts": {
     "vercel-build": "cd frontend && npm install && npm run build"
+  },
+  "devDependencies": {
+    "axios": "^1.17.0",
+    "mysql2": "^3.22.5"
   }
 }
