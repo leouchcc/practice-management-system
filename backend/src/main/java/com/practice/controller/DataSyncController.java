@@ -20,6 +20,36 @@ public class DataSyncController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @PostMapping("/clear")
+    public Result<String> clearData() {
+        try {
+            // 清空现有数据
+            jdbcTemplate.execute("DELETE FROM activity_registration");
+            jdbcTemplate.execute("DELETE FROM activity");
+            jdbcTemplate.execute("DELETE FROM activity_category");
+            jdbcTemplate.execute("DELETE FROM announcement");
+            jdbcTemplate.execute("DELETE FROM activity_suggestion");
+            jdbcTemplate.execute("DELETE FROM system_notification");
+            jdbcTemplate.execute("DELETE FROM credit_record");
+            jdbcTemplate.execute("DELETE FROM sys_user");
+
+            // 重置自增ID
+            jdbcTemplate.execute("ALTER TABLE sys_user AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE activity_category AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE activity AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE activity_registration AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE announcement AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE activity_suggestion AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE system_notification AUTO_INCREMENT = 1");
+            jdbcTemplate.execute("ALTER TABLE credit_record AUTO_INCREMENT = 1");
+
+            return Result.success("数据库清空成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("清空失败: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/export")
     public Result<Map<String, List<Map<String, Object>>>> exportData() {
         try {
