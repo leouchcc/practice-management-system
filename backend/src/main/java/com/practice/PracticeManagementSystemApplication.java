@@ -28,6 +28,23 @@ public class PracticeManagementSystemApplication {
                 String username = System.getenv("MYSQLUSER");
                 String password = System.getenv("MYSQLPASSWORD");
                 
+                // 同时检查带下划线的变量名（Railway 使用的格式）
+                if (host == null || host.isEmpty()) {
+                    host = System.getenv("MYSQL_HOST");
+                }
+                if (port == null || port.isEmpty()) {
+                    port = System.getenv("MYSQL_PORT");
+                }
+                if (database == null || database.isEmpty()) {
+                    database = System.getenv("MYSQL_DATABASE");
+                }
+                if (username == null || username.isEmpty()) {
+                    username = System.getenv("MYSQL_USER");
+                }
+                if (password == null || password.isEmpty()) {
+                    password = System.getenv("MYSQL_PASSWORD");
+                }
+                
                 // 如果环境变量为空，使用默认值
                 if (host == null || host.isEmpty()) {
                     host = "localhost";
