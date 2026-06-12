@@ -159,14 +159,13 @@ public class DataSyncController {
             if (registrations != null) {
                 for (Map<String, Object> registration : registrations) {
                     jdbcTemplate.update(
-                        "INSERT INTO activity_registration (activity_id, user_id, status, real_name, student_id, phone, reason, cancel_reason, create_time, update_time, deleted, proof_file_path, proof_file_name, proof_submit_time, proof_verified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                        registration.get("activity_id"), registration.get("user_id"), registration.get("status"),
-                        registration.get("real_name"), registration.get("student_id"), registration.get("phone"),
-                        registration.get("reason"), registration.get("cancel_reason"),
-                        registration.get("create_time"), registration.get("update_time"),
-                        registration.get("deleted"), registration.get("proof_file_path"),
-                        registration.get("proof_file_name"), registration.get("proof_submit_time"),
-                        registration.get("proof_verified")
+                        "INSERT INTO activity_registration (activity_id, student_id, registration_time, status, check_in_time, check_in_location, check_out_time, actual_hours, deleted, create_time, update_time, proof_file_path, proof_file_name, proof_submit_time, proof_verified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        registration.get("activity_id"), registration.get("student_id"), registration.get("registration_time"),
+                        registration.get("status"), registration.get("check_in_time"), registration.get("check_in_location"),
+                        registration.get("check_out_time"), registration.get("actual_hours"),
+                        registration.get("deleted"), registration.get("create_time"), registration.get("update_time"),
+                        registration.get("proof_file_path"), registration.get("proof_file_name"),
+                        registration.get("proof_submit_time"), registration.get("proof_verified")
                     );
                 }
             }
@@ -280,14 +279,13 @@ public class DataSyncController {
                 case "registrations":
                     for (Map<String, Object> registration : records) {
                         jdbcTemplate.update(
-                            "INSERT INTO activity_registration (activity_id, user_id, status, real_name, student_id, phone, reason, cancel_reason, create_time, update_time, deleted, proof_file_path, proof_file_name, proof_submit_time, proof_verified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                            registration.get("activity_id"), registration.get("user_id"), registration.get("status"),
-                            registration.get("real_name"), registration.get("student_id"), registration.get("phone"),
-                            registration.get("reason"), registration.get("cancel_reason"),
-                            registration.get("create_time"), registration.get("update_time"),
-                            registration.get("deleted"), registration.get("proof_file_path"),
-                            registration.get("proof_file_name"), registration.get("proof_submit_time"),
-                            registration.get("proof_verified")
+                            "INSERT INTO activity_registration (activity_id, student_id, registration_time, status, check_in_time, check_in_location, check_out_time, actual_hours, deleted, create_time, update_time, proof_file_path, proof_file_name, proof_submit_time, proof_verified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                            registration.get("activity_id"), registration.get("student_id"), registration.get("registration_time"),
+                            registration.get("status"), registration.get("check_in_time"), registration.get("check_in_location"),
+                            registration.get("check_out_time"), registration.get("actual_hours"),
+                            registration.get("deleted"), registration.get("create_time"), registration.get("update_time"),
+                            registration.get("proof_file_path"), registration.get("proof_file_name"),
+                            registration.get("proof_submit_time"), registration.get("proof_verified")
                         );
                     }
                     break;
