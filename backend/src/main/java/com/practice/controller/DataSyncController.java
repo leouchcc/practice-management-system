@@ -123,7 +123,7 @@ public class DataSyncController {
 
             // 导出入校建议数据
             data.put("suggestions", jdbcTemplate.queryForList(
-                "SELECT id, activity_id, sender_id, receiver_id, content, parent_id, is_read, status, deleted, " +
+                "SELECT id, activity_id, sender_id, receiver_id, content, parent_id, is_read, deleted, " +
                 "DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') as create_time, " +
                 "DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') as update_time FROM activity_suggestion"
             ));
@@ -262,10 +262,10 @@ public class DataSyncController {
             if (suggestions != null) {
                 for (Map<String, Object> suggestion : suggestions) {
                     jdbcTemplate.update(
-                        "INSERT INTO activity_suggestion (activity_id, sender_id, content, status, create_time, update_time, deleted) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                        suggestion.get("activity_id"), suggestion.get("sender_id"), suggestion.get("content"),
-                        suggestion.get("status"), suggestion.get("create_time"), suggestion.get("update_time"),
-                        suggestion.get("deleted")
+                        "INSERT INTO activity_suggestion (activity_id, sender_id, receiver_id, content, parent_id, is_read, deleted, create_time, update_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        suggestion.get("activity_id"), suggestion.get("sender_id"), suggestion.get("receiver_id"),
+                        suggestion.get("content"), suggestion.get("parent_id"), suggestion.get("is_read"),
+                        suggestion.get("deleted"), suggestion.get("create_time"), suggestion.get("update_time")
                     );
                 }
             }
@@ -370,10 +370,10 @@ public class DataSyncController {
                 case "suggestions":
                     for (Map<String, Object> suggestion : records) {
                         jdbcTemplate.update(
-                            "INSERT INTO activity_suggestion (activity_id, sender_id, content, status, create_time, update_time, deleted) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                            suggestion.get("activity_id"), suggestion.get("sender_id"), suggestion.get("content"),
-                            suggestion.get("status"), suggestion.get("create_time"), suggestion.get("update_time"),
-                            suggestion.get("deleted")
+                            "INSERT INTO activity_suggestion (activity_id, sender_id, receiver_id, content, parent_id, is_read, deleted, create_time, update_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                            suggestion.get("activity_id"), suggestion.get("sender_id"), suggestion.get("receiver_id"),
+                            suggestion.get("content"), suggestion.get("parent_id"), suggestion.get("is_read"),
+                            suggestion.get("deleted"), suggestion.get("create_time"), suggestion.get("update_time")
                         );
                     }
                     break;
