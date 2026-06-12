@@ -78,8 +78,7 @@ public class DataSyncController {
                 "location, max_participants, current_participants, credit_hours, credit_points, " +
                 "is_contact_activity, issue_certificate, certificate_name, status, deleted, " +
                 "DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') as create_time, " +
-                "DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') as update_time, " +
-                "is_certificate FROM activity"
+                "DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') as update_time FROM activity"
             ));
 
             // 导出报名数据
@@ -312,7 +311,7 @@ public class DataSyncController {
                 case "activities":
                     for (Map<String, Object> activity : records) {
                         jdbcTemplate.update(
-                            "INSERT INTO activity (title, category_id, organizer_id, content, start_time, end_time, cancel_deadline, location, max_participants, current_participants, credit_hours, credit_points, is_contact_activity, issue_certificate, certificate_name, status, deleted, create_time, update_time, is_certificate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                            "INSERT INTO activity (title, category_id, organizer_id, content, start_time, end_time, cancel_deadline, location, max_participants, current_participants, credit_hours, credit_points, is_contact_activity, issue_certificate, certificate_name, status, deleted, create_time, update_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                             activity.get("title"), activity.get("category_id"), activity.get("organizer_id"),
                             activity.get("content"), activity.get("start_time"), activity.get("end_time"),
                             activity.get("cancel_deadline"), activity.get("location"),
@@ -320,8 +319,7 @@ public class DataSyncController {
                             activity.get("credit_hours"), activity.get("credit_points"),
                             activity.get("is_contact_activity"), activity.get("issue_certificate"),
                             activity.get("certificate_name"), activity.get("status"),
-                            activity.get("deleted"), activity.get("create_time"), activity.get("update_time"),
-                            activity.get("is_certificate")
+                            activity.get("deleted"), activity.get("create_time"), activity.get("update_time")
                         );
                     }
                     break;
