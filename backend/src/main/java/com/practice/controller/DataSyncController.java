@@ -55,29 +55,78 @@ public class DataSyncController {
         try {
             Map<String, List<Map<String, Object>>> data = new HashMap<>();
 
-            // 导出用户数据（不限制 deleted，导出所有数据）
-            data.put("users", jdbcTemplate.queryForList("SELECT * FROM sys_user"));
+            // 导出用户数据 - 使用 DATE_FORMAT 将日期转换为字符串
+            data.put("users", jdbcTemplate.queryForList(
+                "SELECT id, username, password, real_name, student_id, phone, email, role, status, deleted, " +
+                "DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') as create_time, " +
+                "DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') as update_time FROM sys_user"
+            ));
 
             // 导出分类数据
-            data.put("categories", jdbcTemplate.queryForList("SELECT * FROM activity_category"));
+            data.put("categories", jdbcTemplate.queryForList(
+                "SELECT id, name, description, deleted, " +
+                "DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') as create_time, " +
+                "DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') as update_time FROM activity_category"
+            ));
 
             // 导出活动数据
-            data.put("activities", jdbcTemplate.queryForList("SELECT * FROM activity"));
+            data.put("activities", jdbcTemplate.queryForList(
+                "SELECT id, title, category_id, organizer_id, content, " +
+                "DATE_FORMAT(start_time, '%Y-%m-%d %H:%i:%s') as start_time, " +
+                "DATE_FORMAT(end_time, '%Y-%m-%d %H:%i:%s') as end_time, " +
+                "DATE_FORMAT(cancel_deadline, '%Y-%m-%d %H:%i:%s') as cancel_deadline, " +
+                "location, max_participants, current_participants, credit_hours, credit_points, " +
+                "is_contact_activity, issue_certificate, certificate_name, status, deleted, " +
+                "DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') as create_time, " +
+                "DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') as update_time, " +
+                "is_certificate FROM activity"
+            ));
 
             // 导出报名数据
-            data.put("registrations", jdbcTemplate.queryForList("SELECT * FROM activity_registration"));
+            data.put("registrations", jdbcTemplate.queryForList(
+                "SELECT id, activity_id, student_id, " +
+                "DATE_FORMAT(registration_time, '%Y-%m-%d %H:%i:%s') as registration_time, " +
+                "status, " +
+                "DATE_FORMAT(check_in_time, '%Y-%m-%d %H:%i:%s') as check_in_time, " +
+                "check_in_location, " +
+                "DATE_FORMAT(check_out_time, '%Y-%m-%d %H:%i:%s') as check_out_time, " +
+                "actual_hours, deleted, " +
+                "DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') as create_time, " +
+                "DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') as update_time, " +
+                "proof_file_path, proof_file_name, " +
+                "DATE_FORMAT(proof_submit_time, '%Y-%m-%d %H:%i:%s') as proof_submit_time, " +
+                "proof_verified FROM activity_registration"
+            ));
 
             // 导出公告数据
-            data.put("announcements", jdbcTemplate.queryForList("SELECT * FROM announcement"));
+            data.put("announcements", jdbcTemplate.queryForList(
+                "SELECT id, title, content, publisher_id, target_audience, priority, status, " +
+                "DATE_FORMAT(publish_time, '%Y-%m-%d %H:%i:%s') as publish_time, " +
+                "deleted, " +
+                "DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') as create_time, " +
+                "DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') as update_time FROM announcement"
+            ));
 
             // 导入学分记录
-            data.put("creditRecords", jdbcTemplate.queryForList("SELECT * FROM credit_record"));
+            data.put("creditRecords", jdbcTemplate.queryForList(
+                "SELECT id, student_id, activity_id, registration_id, credit_hours, credit_points, " +
+                "academic_year, semester, deleted, " +
+                "DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') as create_time, " +
+                "DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') as update_time FROM credit_record"
+            ));
 
             // 导出通知数据
-            data.put("notifications", jdbcTemplate.queryForList("SELECT * FROM system_notification"));
+            data.put("notifications", jdbcTemplate.queryForList(
+                "SELECT id, user_id, title, content, type, is_read, related_id, related_type, deleted, " +
+                "DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') as create_time FROM system_notification"
+            ));
 
             // 导出入校建议数据
-            data.put("suggestions", jdbcTemplate.queryForList("SELECT * FROM activity_suggestion"));
+            data.put("suggestions", jdbcTemplate.queryForList(
+                "SELECT id, activity_id, sender_id, receiver_id, content, parent_id, is_read, status, deleted, " +
+                "DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') as create_time, " +
+                "DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') as update_time FROM activity_suggestion"
+            ));
 
             return Result.success(data);
         } catch (Exception e) {
