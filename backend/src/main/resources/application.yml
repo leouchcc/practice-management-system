@@ -1,4 +1,4 @@
-﻿﻿server:
+﻿server:
   port: ${PORT:8080}
   servlet:
     encoding:
@@ -43,3 +43,4 @@ mybatis-plus:
 jwt:
   secret: practice-management-system-secret-key-2024
   expiration: 86400000
+
