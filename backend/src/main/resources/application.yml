@@ -1,14 +1,14 @@
-﻿﻿﻿﻿server:
+﻿﻿server:
   port: ${PORT:8080}
-
-spring:
-  application:
-    name: practice-management-system
-  http:
+  servlet:
     encoding:
       charset: UTF-8
       enabled: true
       force: true
+
+spring:
+  application:
+    name: practice-management-system
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://${MYSQLHOST:${MYSQL_HOST:localhost}}:${MYSQLPORT:${MYSQL_PORT:3306}}/${MYSQLDATABASE:${MYSQL_DATABASE:practice_management}}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&connectTimeout=10000&socketTimeout=30000}
